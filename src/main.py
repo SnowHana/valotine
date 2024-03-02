@@ -8,6 +8,7 @@ API_KEY = "RGAPI-f6591a1d-7714-4b17-87ac-a6b62bea4e2f"
 class Player:
     def __init__(self, player_name: str, player_tag: str, region: str) -> None:
         # Remove white space of player_name and concatentate with player_tag
+        self._puuid = None
         self.player_name = player_name
         self.player_tag = player_tag
 
@@ -15,7 +16,7 @@ class Player:
         assert region.lower() in ["americas", "asia", "esports", "europe"]
         self.region = region.lower()
 
-        # Get puuid, an unique identifier
+        # Set puuid, an unique identifier
         self.init_puuid()
 
     @property
@@ -41,7 +42,24 @@ class Player:
         player_info = resp.json()
         self._puuid = player_info["puuid"]
 
-    def _concat_name_and_tag(self) -> str:
+    def get_match_ids(self):
+        api_url = (
+                "https://" +
+                mass_region +
+                ".api.riotgames.com/lol/match/v5/matches/by-puuid/" +
+                puuid +
+                "/ids?start=0&count=20" +
+                "&api_key=" +
+                api_key
+        )
+
+        print(api_url)
+
+        resp = requests.get(api_url)
+        match_ids = resp.json()
+        return match_ids
+
+def _concat_name_and_tag(self) -> str:
         """Return a concatenated name
         Ex. Hide on bush#KR1 -> Hide%20on%20bush/KR1
         """
@@ -53,3 +71,4 @@ print(faker.puuid)
 
 canyon = Player("JUGKING", "KR1", "Asia")
 print(canyon.puuid)
+
