@@ -11,7 +11,7 @@ def main():
     opgg = OPGG()
 
     summoner: Summoner
-    for summoner in opgg.search(["ColbyFaulkn1"]):
+    for summoner in opgg.search(["JUGKING"]):
         print(summoner)
 
 

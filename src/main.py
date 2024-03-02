@@ -44,13 +44,13 @@ class Player:
 
     def get_match_ids(self):
         api_url = (
-                "https://" +
-                mass_region +
-                ".api.riotgames.com/lol/match/v5/matches/by-puuid/" +
-                puuid +
-                "/ids?start=0&count=20" +
-                "&api_key=" +
-                api_key
+            "https://"
+            + mass_region
+            + ".api.riotgames.com/lol/match/v5/matches/by-puuid/"
+            + puuid
+            + "/ids?start=0&count=20"
+            + "&api_key="
+            + api_key
         )
 
         print(api_url)
@@ -59,7 +59,7 @@ class Player:
         match_ids = resp.json()
         return match_ids
 
-def _concat_name_and_tag(self) -> str:
+    def _concat_name_and_tag(self) -> str:
         """Return a concatenated name
         Ex. Hide on bush#KR1 -> Hide%20on%20bush/KR1
         """
@@ -71,4 +71,3 @@ print(faker.puuid)
 
 canyon = Player("JUGKING", "KR1", "Asia")
 print(canyon.puuid)
-
